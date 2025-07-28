@@ -35,6 +35,11 @@ public partial class FoxRenderer : Window
     public FoxRenderer()
     {
         InitializeComponent();
+        if (Process.GetProcessesByName("ComboRenderer").Length > 0)
+        {
+            this.Close();
+        }
+
         SettingsManager.Instance.OnPausePlay += Settings_OnPausePlay;
         SettingsManager.Instance.Settings.TrackWindowChanged += Settings_TrackWindowChanged;
         SettingsManager.Instance.Settings.FollowDolphinChanged += Settings_FollowDolphinChanged;
