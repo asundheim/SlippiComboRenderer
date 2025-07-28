@@ -1,0 +1,16 @@
+{
+  "profiles": {
+    "LiveComboRenderer": {
+      "commandName": "Project",
+      "nativeDebugging": false
+    },
+    "ReplayComboRenderer": {
+      "commandName": "Project",
+      "commandLineArgs": "C:\\src\\Slippi.NET\\src\\ComboRenderer\\slp\\VALK#839.slp 3739"
+    },
+    "QueueComboRenderer": {
+      "commandName": "Project",
+      "commandLineArgs": "queue .\\Assets\\queue.json"
+    }
+  }
+}
