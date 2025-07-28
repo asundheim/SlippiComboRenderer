@@ -4,6 +4,7 @@ using Windows.Win32.UI.WindowsAndMessaging;
 namespace ComboRenderer.Interop.Types;
 
 // amen
+#pragma warning disable CS0649
 internal unsafe ref struct NOTIFYICONDATAW
 {
     /// <summary>

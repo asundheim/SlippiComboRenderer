@@ -2,6 +2,7 @@
 
 namespace ComboRenderer;
 
+#pragma warning disable CS0067
 internal class RelayCommand : ICommand
 {
     private readonly Action<object?> _execute;

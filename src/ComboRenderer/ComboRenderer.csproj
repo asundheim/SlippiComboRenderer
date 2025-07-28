@@ -6,19 +6,25 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UseWPF>true</UseWPF>
+    <PublishTrimmed>false</PublishTrimmed>
 	<LangVersion>preview</LangVersion>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <ApplicationIcon>Assets\gamecube.ico</ApplicationIcon>
+	<IncludeNativeLibrariesForSelfExtract>true</IncludeNativeLibrariesForSelfExtract>
   </PropertyGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\ComboInterpreter\ComboInterpreter.csproj" />
   </ItemGroup>
 
-    <ItemGroup>
-        <Content Include="Assets\**\*.*" CopyToOutputDirectory="PreserveNewest" />
-	    <None Include="slp\**\*.*" />
-    </ItemGroup>
+  <ItemGroup>
+	<Content Include="Assets\**\*.*">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  <CopyToPublishDirectory>Always</CopyToPublishDirectory>
+	  <Link>Assets\%(Filename)%(Extension)</Link>
+	</Content>
+	<None Include="slp\**\*.*" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Hardcodet.NotifyIcon.Wpf" Version="2.0.1" />
@@ -31,4 +37,12 @@
     <PackageReference Include="Slippi.NET" Version="0.3.2" />
   </ItemGroup>
 
+  <Target Name="CopyContentToPublish" AfterTargets="Publish">
+	<Copy SourceFiles="@(Content)" DestinationFiles="$(PublishDir)\Assets\%(Filename)%(Extension)"/>
+	<ItemGroup>
+      <FilesToDelete Include="$(PublishDir)\*.pdb"/>
+	  <FilesToDelete Include="$(PublishDir)\Assets\*.json"/>
+	</ItemGroup>
+    <Delete Files="@(FilesToDelete)"/>
+  </Target> 
 </Project>

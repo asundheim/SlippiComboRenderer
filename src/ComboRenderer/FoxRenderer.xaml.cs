@@ -349,7 +349,7 @@ public partial class FoxRenderer : Window
         });
     }
 
-    private void HandleReconnect()
+    internal void HandleReconnect()
     {
         _comboBot?.Dispose();
         _dolphinTracker?.Dispose();

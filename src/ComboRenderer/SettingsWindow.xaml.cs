@@ -182,4 +182,9 @@ public partial class SettingsWindow : Window
             SettingsManager.Instance.SaveSettings();
         }
     }
+
+    private void RefreshDolphinButton_Click(object sender, RoutedEventArgs e)
+    {
+        _parent.HandleReconnect();
+    }   
 }
