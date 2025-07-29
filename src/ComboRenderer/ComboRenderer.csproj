@@ -34,7 +34,7 @@
     </PackageReference>
     <PackageReference Include="ModernWpfUI" Version="0.9.6" />
     <PackageReference Include="obs-websocket-dotnet" Version="5.0.1" />
-    <PackageReference Include="Slippi.NET" Version="0.3.2" />
+    <PackageReference Include="Slippi.NET" Version="0.4.0" />
   </ItemGroup>
 
   <Target Name="CopyContentToPublish" AfterTargets="Publish">

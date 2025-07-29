@@ -2,7 +2,6 @@
 A project to render out live button sequences as they occur in a tracked Dolphin instance. This is primarily meant to be used as a stream overlay, but has some
 functionality built in to launch replays and automatically record queues of clips with OBS.
 
-
 Built on top of [Slippi.NET](https://github.com/asundheim/Slippi.NET)
 
 ![](docs/sample.gif)
