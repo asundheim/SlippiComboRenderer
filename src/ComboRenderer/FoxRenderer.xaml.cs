@@ -35,7 +35,7 @@ public partial class FoxRenderer : Window
     public FoxRenderer()
     {
         InitializeComponent();
-        if (Process.GetProcessesByName("ComboRenderer").Length > 0)
+        if (Process.GetProcessesByName("ComboRenderer").Length > 1)
         {
             this.Close();
         }
@@ -131,6 +131,11 @@ public partial class FoxRenderer : Window
                     AdjustWindowForExplicit();
                 }
             };
+
+            _comboRenderer.OnDI += HandleDI;
+            _comboRenderer.OnStatusChange += HandleStatusChange;
+            _comboRenderer.OnGameEnd += HandleGameEnd;
+            _comboRenderer.Begin(_obs);
         }
     }
 
@@ -411,7 +416,7 @@ public partial class FoxRenderer : Window
             // ew
             Task.Run(async () =>
             {
-                _obs.ConnectAsync("", string.Empty);
+                _obs.ConnectAsync($"ws://{SettingsManager.Instance.Settings.OBSAddress}:{SettingsManager.Instance.Settings.OBSPort}", string.Empty);
                 await tcsOnConnect.Task;
             }).Wait();
         }

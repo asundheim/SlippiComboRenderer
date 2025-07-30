@@ -34,7 +34,9 @@ internal class ReplayComboRenderer : BaseComboRenderer
 
     public override void Begin(OBSWebsocket? obs = null)
     {
-        _dolphinLauncher = new DolphinLauncher(@"C:\Users\ander\Downloads\meleeout.iso");
+        _dolphinLauncher = string.IsNullOrEmpty(SettingsManager.Instance.Settings.ReplayDolphinPath) ?
+            new DolphinLauncher(SettingsManager.Instance.Settings.ReplayIsoPath) :
+            new DolphinLauncher(SettingsManager.Instance.Settings.ReplayIsoPath, SettingsManager.Instance.Settings.ReplayDolphinPath);
 
         _dolphinLauncher.OnPlaybackStartFrameAndFilePath += (object? sender, PlaybackFilePathAndStartFrameEventArgs args) =>
         {

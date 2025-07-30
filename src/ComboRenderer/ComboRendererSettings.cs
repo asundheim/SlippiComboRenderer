@@ -63,4 +63,12 @@ internal class ComboRendererSettings
         }
     } = "Live";
     public event EventHandler<string>? TrackWindowChanged;
+
+    public string ReplayIsoPath { get; set; } = string.Empty;
+
+    public string ReplayDolphinPath { get; set; } = string.Empty;
+
+    public string OBSAddress { get; set; } = string.Empty;
+
+    public int OBSPort { get; set; } = 4455;
 }

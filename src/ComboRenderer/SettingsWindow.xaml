@@ -178,24 +178,37 @@
                     </StackPanel>
 
                     <Separator/>
+                    <Separator/>
 
-                    <!--<StackPanel Orientation="Horizontal">
-                        <TextBlock x:Name="ComboRendererStatusText" Text="Combo Renderer Status: Active"/>
-                        <Button x:Name="PauseRendererButton" Margin="5,0,0,0" Style="{StaticResource IconButton}" Click="PauseRendererButton_Click">
-                            <ui:PathIcon>
-                                <ui:PathIcon.Data>
-                                    M6 3.5a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-1 0V4a.5.5 0 0 1 .5-.5m4 0a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-1 0V4a.5.5 0 0 1 .5-.5
-                                </ui:PathIcon.Data>
-                            </ui:PathIcon>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock x:Name="ReplayIsoPathText" Text="Replay ISO path: " VerticalAlignment="Center" />
+                        <Button x:Name="BrowseIsoButton" Margin="5,0,0,0" Click="BrowseIsoButton_Click">
+                            <TextBlock Text="Browse"/>
                         </Button>
-                        <Button x:Name="PlayRendererButton" Margin="5,0,0,0" Style="{StaticResource IconButton}" Click="PlayRendererButton_Click">
-                            <ui:PathIcon>
-                                <ui:PathIcon.Data>
-                                    m11.596 8.697-6.363 3.692c-.54.313-1.233-.066-1.233-.697V4.308c0-.63.692-1.01 1.233-.696l6.363 3.692a.802.802 0 0 1 0 1.393
-                                </ui:PathIcon.Data>
-                            </ui:PathIcon>
+                    </StackPanel>
+
+                    <Separator/>
+
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock x:Name="ReplayDolphinText" Text="Replay Dolphin path: " VerticalAlignment="Center"/>
+                        <Button x:Name="BrowseReplayDolphinButton" Margin="5,0,0,0" Click="BrowseReplayDolphinButton_Click">
+                            <TextBlock Text="Browse"/>
                         </Button>
-                    </StackPanel>-->
+                    </StackPanel>
+                    
+                    <Separator/>
+
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="OBS Websocket address: " VerticalAlignment="Center"/>
+                        <TextBox x:Name="OBSAddressInput" TextChanged="OBSAddressInput_TextChanged" MinWidth="250" />
+                    </StackPanel>
+
+                    <Separator/>
+
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="OBS Websocket port: " VerticalAlignment="Center"/>
+                        <ui:NumberBox x:Name="OBSPortInput" Value="4455" ValueChanged="OBSPortInput_ValueChanged"/>
+                    </StackPanel>
 
                     <Separator/>
                 </StackPanel>

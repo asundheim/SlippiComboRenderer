@@ -1,4 +1,5 @@
-﻿using Slippi.NET.Console.Types;
+﻿using Microsoft.Win32;
+using Slippi.NET.Console.Types;
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
@@ -24,7 +25,10 @@ public partial class SettingsWindow : Window
         this.ConnectCodes.ItemsSource = SettingsManager.Instance.Settings.ConnectCodes;
         this.DisplayNames.ItemsSource = SettingsManager.Instance.Settings.DisplayNames;
         this.DolphinStatusText.Text = $"Dolphin status: {SettingsManager.Instance.DolphinConnectionStatus}";
-        //this.ComboRendererStatusText.Text = "Combo renderer status: Active";
+        this.ReplayDolphinText.Text = $"Replay Dolphin path: {SettingsManager.Instance.Settings.ReplayDolphinPath}";
+        this.ReplayIsoPathText.Text = $"Replay ISO path: {SettingsManager.Instance.Settings.ReplayIsoPath}";
+        this.OBSAddressInput.Text = SettingsManager.Instance.Settings.OBSAddress;
+        this.OBSPortInput.Value = SettingsManager.Instance.Settings.OBSPort;
         this.WidthBox.Value = SettingsManager.Instance.Settings.ExplicitWidth;
         this.HeightBox.Value = SettingsManager.Instance.Settings.ExplicitHeight;
 
@@ -186,5 +190,51 @@ public partial class SettingsWindow : Window
     private void RefreshDolphinButton_Click(object sender, RoutedEventArgs e)
     {
         _parent.HandleReconnect();
-    }   
+    }
+
+    private void OBSPortInput_ValueChanged(ModernWpf.Controls.NumberBox sender, ModernWpf.Controls.NumberBoxValueChangedEventArgs args)
+    {
+        if (!_initializing)
+        {
+            SettingsManager.Instance.Settings.OBSPort = (int)args.NewValue;
+            SettingsManager.Instance.SaveSettings();
+        }
+    }
+
+    private void OBSAddressInput_TextChanged(object sender, TextChangedEventArgs e)
+    {
+        if (!_initializing)
+        {
+            SettingsManager.Instance.Settings.OBSAddress = OBSAddressInput.Text;
+            SettingsManager.Instance.SaveSettings();
+        }
+    }
+
+    private void BrowseIsoButton_Click(object sender, RoutedEventArgs e)
+    {
+        OpenFileDialog fd = new OpenFileDialog();
+        fd.DefaultExt = ".iso";
+        fd.Filter = "ISO Images (.iso)|*.iso";
+        if (fd.ShowDialog() == true)
+        {
+            SettingsManager.Instance.Settings.ReplayIsoPath = fd.FileName;
+            SettingsManager.Instance.SaveSettings();
+
+            ReplayIsoPathText.Text = $"Replay ISO path: {SettingsManager.Instance.Settings.ReplayIsoPath}";
+        }
+    }
+
+    private void BrowseReplayDolphinButton_Click(object sender, RoutedEventArgs e)
+    {
+        OpenFileDialog fd = new OpenFileDialog();
+        fd.DefaultExt = ".exe";
+        fd.Filter = "Executables (.exe)|*.exe";
+        if (fd.ShowDialog() == true)
+        {
+            SettingsManager.Instance.Settings.ReplayDolphinPath = fd.FileName;
+            SettingsManager.Instance.SaveSettings();
+
+            ReplayDolphinText.Text = $"Replay Dolphin path: {SettingsManager.Instance.Settings.ReplayDolphinPath}";
+        }
+    }
 }
