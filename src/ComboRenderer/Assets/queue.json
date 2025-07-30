@@ -2,6 +2,16 @@
     "mode": "queue",
     "queue": [
     {
+      "path": "C:\\src\\SlippiComboRenderer\\src\\ComboRenderer\\slp\\BUN#400.slp",
+      "startFrame": 212,
+      "endFrame": 680
+    },
+    {
+      "path": "C:\\src\\SlippiComboRenderer\\src\\ComboRenderer\\slp\\POOP#733.slp",
+      "startFrame": 350,
+      "endFrame": 889
+    },
+    {
       "path": "C:\\src\\SlippiComboRenderer\\src\\ComboRenderer\\slp\\STRONG#3.slp",
       "startFrame": 4900,
       "endFrame": 5517
@@ -107,59 +117,59 @@
       "endFrame": 12227
     },
     {
-        "path": "C:\\src\\SlippiComboRenderer\\src\\ComboRenderer\\slp\\DERRICK#0.slp",
-        "startFrame": 4800,
-        "endFrame": 5294
+      "path": "C:\\src\\SlippiComboRenderer\\src\\ComboRenderer\\slp\\DERRICK#0.slp",
+      "startFrame": 4800,
+      "endFrame": 5294
     },
     {
-        "path":"C:\\src\\SlippiComboRenderer\\src\\ComboRenderer\\slp\\CHID#695-2.slp",
-        "startFrame": 3359,
-        "endFrame": 3827
+      "path": "C:\\src\\SlippiComboRenderer\\src\\ComboRenderer\\slp\\CHID#695-2.slp",
+      "startFrame": 3359,
+      "endFrame": 3827
     },
     {
-        "path": "C:\\src\\SlippiComboRenderer\\src\\ComboRenderer\\slp\\SWID#197.slp",
-        "startFrame": 5714,
-        "endFrame": 6297
+      "path": "C:\\src\\SlippiComboRenderer\\src\\ComboRenderer\\slp\\SWID#197.slp",
+      "startFrame": 5714,
+      "endFrame": 6297
     },
     {
-        "path": "C:\\src\\SlippiComboRenderer\\src\\ComboRenderer\\slp\\VALK#839.slp",
-        "startFrame": 3739,
-        "endFrame": 4206
+      "path": "C:\\src\\SlippiComboRenderer\\src\\ComboRenderer\\slp\\VALK#839.slp",
+      "startFrame": 3739,
+      "endFrame": 4206
     },
     {
-        "path": "C:\\src\\SlippiComboRenderer\\src\\ComboRenderer\\slp\\CAM#930.slp",
-        "startFrame": 3130,
-        "endFrame": 3390
+      "path": "C:\\src\\SlippiComboRenderer\\src\\ComboRenderer\\slp\\CAM#930.slp",
+      "startFrame": 3130,
+      "endFrame": 3390
     },
     {
-        "path": "C:\\src\\SlippiComboRenderer\\src\\ComboRenderer\\slp\\KVD#432.slp",
-        "startFrame": 5537,
-        "endFrame": 6055
+      "path": "C:\\src\\SlippiComboRenderer\\src\\ComboRenderer\\slp\\KVD#432.slp",
+      "startFrame": 5537,
+      "endFrame": 6055
     },
     {
-        "path": "C:\\src\\SlippiComboRenderer\\src\\ComboRenderer\\slp\\SILVI#0-2.slp",
-        "startFrame": 2489,
-        "endFrame": 3116
+      "path": "C:\\src\\SlippiComboRenderer\\src\\ComboRenderer\\slp\\SILVI#0-2.slp",
+      "startFrame": 2489,
+      "endFrame": 3116
     },
     {
-        "path": "C:\\src\\SlippiComboRenderer\\src\\ComboRenderer\\slp\\INDI#794.slp",
-        "startFrame": 7483,
-        "endFrame": 7752
+      "path": "C:\\src\\SlippiComboRenderer\\src\\ComboRenderer\\slp\\INDI#794.slp",
+      "startFrame": 7483,
+      "endFrame": 7752
     },
     {
-        "path": "C:\\src\\SlippiComboRenderer\\src\\ComboRenderer\\slp\\FOUR#862.slp",
-        "startFrame": 2292,
-        "endFrame": 3300
+      "path": "C:\\src\\SlippiComboRenderer\\src\\ComboRenderer\\slp\\FOUR#862.slp",
+      "startFrame": 2292,
+      "endFrame": 3300
     },
     {
-        "path": "C:\\src\\SlippiComboRenderer\\src\\ComboRenderer\\slp\\BIO#0.slp",
-        "startFrame": 9990,
-        "endFrame": 10272
+      "path": "C:\\src\\SlippiComboRenderer\\src\\ComboRenderer\\slp\\BIO#0.slp",
+      "startFrame": 9990,
+      "endFrame": 10272
     },
     {
-        "path": "C:\\src\\SlippiComboRenderer\\src\\ComboRenderer\\slp\\JETS#0.slp",
-        "startFrame": 6829,
-        "endFrame": 7292
+      "path": "C:\\src\\SlippiComboRenderer\\src\\ComboRenderer\\slp\\JETS#0.slp",
+      "startFrame": 6829,
+      "endFrame": 7292
     },
     {
       "path": "C:\\src\\SlippiComboRenderer\\src\\ComboRenderer\\slp\\DOBY#705-1.slp",

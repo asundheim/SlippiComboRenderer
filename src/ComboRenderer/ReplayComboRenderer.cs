@@ -96,6 +96,7 @@ internal class ReplayComboRenderer : BaseComboRenderer
             {
                 Mode = DolphinLaunchModes.Queue,
                 Queue = _replays,
+                ShouldResync = false
             };
         }
         else 
