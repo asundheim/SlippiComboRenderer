@@ -3,21 +3,25 @@ using OBSWebsocketDotNet;
 using Slippi.NET.Console;
 using Slippi.NET.Console.Types;
 using Slippi.NET.Types;
+using System.Diagnostics;
 using System.IO;
 using System.Windows;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace ComboRenderer;
 
 internal class ReplayComboRenderer : BaseComboRenderer
 {
-    private Window _window;
+    private readonly Window _window;
     private DolphinLauncher? _dolphinLauncher;
     private FoxComboInterpreter? _comboBot;
 
-    private string? _replayPath = null;
+    private readonly string? _replayPath = null;
     private int? _startFrame = null;
+    private QueueItem? _currentQueueItem = null;
 
-    private IList<QueueItem>? _replays = null;
+    private IList<QueueItem>? _queue = null;
+    private IList<QueueItem> _rerecordQueue = [];
 
     public ReplayComboRenderer(Window window, string replayPath, int startFrame = (int)Frames.FIRST) : base()
     { 
@@ -29,7 +33,7 @@ internal class ReplayComboRenderer : BaseComboRenderer
     public ReplayComboRenderer(Window window, IList<QueueItem> replays) : base()
     {
         _window = window;
-        _replays = replays;
+        _queue = replays;
     }
 
     public override void Begin(OBSWebsocket? obs = null)
@@ -38,13 +42,14 @@ internal class ReplayComboRenderer : BaseComboRenderer
             new DolphinLauncher(SettingsManager.Instance.Settings.ReplayIsoPath) :
             new DolphinLauncher(SettingsManager.Instance.Settings.ReplayIsoPath, SettingsManager.Instance.Settings.ReplayDolphinPath);
 
-        _dolphinLauncher.OnPlaybackStartFrameAndFilePath += (object? sender, PlaybackFilePathAndStartFrameEventArgs args) =>
+        _dolphinLauncher.OnPlaybackStartFrameAndFilePath += (object? sender, PlaybackEventArgs args) =>
         {
             _cts?.Dispose();
             _cts = new CancellationTokenSource();
             _cancellationToken = _cts.Token;
 
             _startFrame = args.StartFrame;
+            _currentQueueItem = args.QueueItem;
             obs?.SetProfileParameter("Output", "FilenameFormatting", Path.GetFileNameWithoutExtension(args.FilePath));
 
             if (_comboBot is not null)
@@ -60,9 +65,20 @@ internal class ReplayComboRenderer : BaseComboRenderer
 
         _dolphinLauncher.OnReplayedFrame += (object? sender, int frame) =>
         {
-            if (_startFrame + 2 /* avoid recording the white frames if it's seeking */ == frame)
+            try
             {
-                obs?.StartRecord();
+                if (_startFrame + 2 /* avoid recording the white frames if it's seeking */ == frame)
+                {
+                    obs?.StartRecord();
+                }
+            }
+            catch
+            {
+                // OBS was still finishing the previous recording - we'll try again once we're done
+                if (_currentQueueItem is not null)
+                {
+                    _rerecordQueue.Add(_currentQueueItem);
+                }
             }
 
             _comboBot?.ProcessFrame(frame);
@@ -71,13 +87,38 @@ internal class ReplayComboRenderer : BaseComboRenderer
         _dolphinLauncher.OnPlaybackComplete += (_, _) =>
         {
             _cts?.Cancel();
-            obs?.StopRecord();
+
+            try
+            {
+                obs?.StopRecord();
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine($"{e.Message}");
+                Debug.WriteLine("Failed to stop recording");
+            }
         };
 
         _dolphinLauncher.OnDolphinClosed += (_, _) =>
         {
             _cts?.Cancel();
-            _window.Dispatcher.BeginInvoke(() => _window.Close());
+
+            if (_rerecordQueue.Count > 0)
+            {
+                _window.Dispatcher.BeginInvoke(() =>
+                {
+                    this.Dispose();
+
+                    _queue = _rerecordQueue;
+                    _rerecordQueue = [];
+
+                    this.Begin(obs);
+                });
+            }
+            else
+            {
+                _window.Dispatcher.BeginInvoke(() => _window.Close());
+            }
         };
 
         DolphinLaunchArgs launchArgs;
@@ -90,12 +131,12 @@ internal class ReplayComboRenderer : BaseComboRenderer
                 EndFrame = int.MaxValue
             };
         }
-        else if (_replays is not null)
+        else if (_queue is not null)
         {
             launchArgs = new DolphinLaunchArgs()
             {
                 Mode = DolphinLaunchModes.Queue,
-                Queue = _replays,
+                Queue = _queue,
                 ShouldResync = false
             };
         }
