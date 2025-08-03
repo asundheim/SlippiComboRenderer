@@ -5,6 +5,7 @@ using Slippi.NET.Console.Types;
 using Slippi.NET.Types;
 using System.Diagnostics;
 using System.IO;
+using System.Security.Policy;
 using System.Windows;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
@@ -96,6 +97,11 @@ internal class ReplayComboRenderer : BaseComboRenderer
             {
                 Debug.WriteLine($"{e.Message}");
                 Debug.WriteLine("Failed to stop recording");
+
+                if (_currentQueueItem is not null && (_rerecordQueue.Count == 0 || (_rerecordQueue[^1].Path != _currentQueueItem.Path)))
+                {
+                    _rerecordQueue.Add(_currentQueueItem);
+                }
             }
         };
 
@@ -109,7 +115,7 @@ internal class ReplayComboRenderer : BaseComboRenderer
                 {
                     this.Dispose();
 
-                    _queue = _rerecordQueue;
+                    _queue = [.._rerecordQueue];
                     _rerecordQueue = [];
 
                     this.Begin(obs);

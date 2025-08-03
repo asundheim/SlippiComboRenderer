@@ -10,7 +10,7 @@
     },
     "QueueComboRenderer": {
       "commandName": "Project",
-      "commandLineArgs": "queue .\\Assets\\queue.json"
+      "commandLineArgs": "queue .\\Assets\\queue2.json"
     }
   }
 }
