@@ -276,63 +276,73 @@ public partial class ComboRendererWindow : Window
 
     private void HandleDI(object? sender, DIEventArgs e)
     {
-        double angle = Math.Atan2(e.PreFrameUpdate.JoystickY ?? 0, e.PreFrameUpdate.JoystickX ?? 0);
-        double angleDegrees = angle * (180 / Math.PI);
-        Dispatcher.BeginInvoke(() =>
+        if (SettingsManager.Instance.Settings.EnableDICam)
         {
-            const int SCALE = 10;
-            BitmapImage bmp = new BitmapImage(new Uri(@"Assets\analog-dd-left.png", UriKind.Relative));
-            Image img = new Image()
+            double angle = Math.Atan2(e.PreFrameUpdate.JoystickY ?? 0, e.PreFrameUpdate.JoystickX ?? 0);
+            double angleDegrees = angle * (180 / Math.PI);
+            Dispatcher.BeginInvoke(() =>
             {
-                Source = bmp,
-                Width = bmp.Width / SCALE,
-                Height = bmp.Height / SCALE,
-                HorizontalAlignment = HorizontalAlignment.Left,
-                VerticalAlignment = VerticalAlignment.Center,
-            };
+                const int SCALE = 10;
+                BitmapImage bmp = new BitmapImage(new Uri(@"Assets\analog-dd-left.png", UriKind.Relative));
+                Image img = new Image()
+                {
+                    Source = bmp,
+                    Width = bmp.Width / SCALE,
+                    Height = bmp.Height / SCALE,
+                    HorizontalAlignment = HorizontalAlignment.Left,
+                    VerticalAlignment = VerticalAlignment.Center,
+                };
 
-            img.RenderTransform = new RotateTransform(angleDegrees + 180, img.Width / 2, img.Height / 2);
-            RenderOptions.SetBitmapScalingMode(img, BitmapScalingMode.HighQuality);
+                img.RenderTransform = new RotateTransform(angleDegrees + 180, img.Width / 2, img.Height / 2);
+                RenderOptions.SetBitmapScalingMode(img, BitmapScalingMode.HighQuality);
 
-            int stocksLeft = e.PostFrameUpdate.StocksRemaining!.Value;
-            StackPanel panel = new StackPanel()
-            {
-                Orientation = Orientation.Vertical,
-            };
-            //panel.Background = Brushes.Black;
-            panel.HorizontalAlignment = HorizontalAlignment.Left;
+                int stocksLeft = e.PostFrameUpdate.StocksRemaining!.Value;
+                StackPanel panel = new StackPanel()
+                {
+                    Orientation = Orientation.Vertical,
+                };
+                //panel.Background = Brushes.Black;
+                panel.HorizontalAlignment = HorizontalAlignment.Left;
 
-            var text = ComboImageBuilder.GetStrokeText(this, "DI CAM", 36);
-            text.Margin = new Thickness(0, 0, 0, 5);
-            panel.Children.Add(text);
-            panel.Children.Add(img);
-            panel.Measure(new Size(double.PositiveInfinity, double.PositiveInfinity));
-            Border panelBorder = new Border()
-            {
-                BorderBrush = new SolidColorBrush(Colors.Black),
-                BorderThickness = new Thickness(2),
-                Child = panel,
-                Margin = new Thickness((e.PlayerIndex * 424) + (stocksLeft * 50) + 135, 0, 0, 320),
-                Background = new SolidColorBrush(Colors.Black) { Opacity = 0.5 },
-                CornerRadius = new CornerRadius(15),
-                Padding = new Thickness(5)
-            };
+                var text = ComboImageBuilder.GetStrokeText(this, "DI CAM", 36);
+                text.Margin = new Thickness(0, 0, 0, 5);
+                panel.Children.Add(text);
+                panel.Children.Add(img);
+                panel.Measure(new Size(double.PositiveInfinity, double.PositiveInfinity));
+                Border panelBorder = new Border()
+                {
+                    BorderBrush = new SolidColorBrush(Colors.Black),
+                    BorderThickness = new Thickness(2),
+                    Child = panel,
+                    Margin = new Thickness((e.PlayerIndex * 424) + (stocksLeft * 50) + 135, 0, 0, 320),
+                    Background = new SolidColorBrush(Colors.Black) { Opacity = 0.5 },
+                    CornerRadius = new CornerRadius(15),
+                    Padding = new Thickness(5)
+                };
 
-            bool animate = this.DIContainer.Child is null;
-            this.DIContainer.Child = panelBorder;
+                bool animate = this.DIContainer.Child is null;
+                this.DIContainer.Child = panelBorder;
 
-            if (animate)
-            {
-                panelBorder.PopInOut();
-            }
+                if (animate)
+                {
+                    panelBorder.PopInOut();
+                }
 
-            _lastDi = DateTime.Now;
+                _lastDi = DateTime.Now;
 
-            _ = Task.Run(async () =>
-            {
-                await DITimeout();
+                _ = Task.Run(async () =>
+                {
+                    await DITimeout();
+                });
             });
-        });
+        }
+        else
+        {
+            Dispatcher.BeginInvoke(() =>
+            {
+                this.DIContainer.Child = null;
+            });
+        }
     }
 
     private async Task DITimeout()
@@ -340,7 +350,7 @@ public partial class ComboRendererWindow : Window
         await Task.Delay(750);
         if (_lastDi != DateTime.MinValue)
         {
-            if (DateTime.Now.Subtract(_lastDi).Duration().TotalMilliseconds >= 750)
+            if (DateTime.Now.Subtract(_lastDi).Duration().TotalMilliseconds >= 650)
             {
                 _ = Dispatcher.BeginInvoke(() =>
                 {

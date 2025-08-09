@@ -5,6 +5,7 @@ using Slippi.NET.Console;
 using Slippi.NET.Console.Types;
 using Slippi.NET.Slp.Reader.File;
 using Slippi.NET.Slp.Writer;
+using System.Reflection.Metadata;
 
 namespace ComboRenderer;
 
@@ -12,6 +13,7 @@ internal class LiveComboRenderer : BaseComboRenderer
 {
     private DolphinConnection? _connection;
     private SlpFileWriter? _fileWriter;
+    private BaseComboInterpreter? _comboBot;
 
     public LiveComboRenderer() : base()
     {
@@ -43,9 +45,16 @@ internal class LiveComboRenderer : BaseComboRenderer
                 await Task.Delay(1000);
 
                 _cancellationToken = _cts.Token;
-                var comboBot = Utils.GetComboInterpreterForSettings(gamePath: path, isLive: true);
+                if (_comboBot is not null)
+                {
+                    _comboBot.Dispose();
+                    _comboBot.OnDI -= HandleDI;
+                }
 
-                InvokeNewGame(comboBot);
+                _comboBot = Utils.GetComboInterpreterForSettings(gamePath: path, isLive: true);
+                _comboBot.OnDI += HandleDI;
+
+                InvokeNewGame(_comboBot);
             });
         };
 
@@ -73,11 +82,22 @@ internal class LiveComboRenderer : BaseComboRenderer
         });
     }
 
+    private void HandleDI(object? sender, DIEventArgs e)
+    {
+        InvokeDI(e);
+    }
+
     public override void Dispose()
     {
         base.Dispose();
 
         _connection?.Dispose();
         _fileWriter?.Dispose();
+        if (_comboBot is not null)
+        {
+            _comboBot.OnDI -= HandleDI;
+            _comboBot.Dispose();
+            _comboBot = null;
+        }
     }
 }

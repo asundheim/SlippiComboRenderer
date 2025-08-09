@@ -95,11 +95,15 @@
                     </StackPanel>
                     
                     <Separator/>
-                    <CheckBox x:Name="chkFollowDolphin" IsChecked="True" Checked="chkFollowDolphin_Checked" Unchecked="chkFollowDolphin_Unchecked"
-                        Margin="0,0,0,0">
+                    <CheckBox x:Name="chkFollowDolphin" IsChecked="True" Checked="chkFollowDolphin_Checked" Unchecked="chkFollowDolphin_Unchecked">
                         <TextBlock Text="Auto-align to Dolphin"
                             Cursor="Help" ToolTipService.InitialShowDelay="0" ToolTip="Uncheck this if you want OBS to handle positioning / compositing."/>
                     </CheckBox>
+                    <CheckBox x:Name="chkEnableDICam" IsChecked="True" Checked="chkEnableDICam_Checked" Unchecked="chkEnableDICam_Unchecked">
+                        <TextBlock Text="Show DI Cam"
+                                   Cursor="Help" ToolTipService.InitialShowDelay="0" ToolTip="Show the DI Cam popup?"/>
+                    </CheckBox>
+                              
                     <StackPanel Orientation="Vertical" Margin="15,0" IsEnabled="{Binding ElementName=chkFollowDolphin, Path=IsChecked, Converter={StaticResource InverseBoolConverter}}">
                         <StackPanel Orientation="Horizontal">
                             <TextBlock Text="Width: " VerticalAlignment="Center" IsEnabled="{Binding ElementName=chkFollowDolphin, Path=IsChecked, Converter={StaticResource InverseBoolConverter}}"/>

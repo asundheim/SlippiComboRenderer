@@ -22,6 +22,7 @@ public partial class SettingsWindow : Window
         InitializeComponent();
 
         this.chkFollowDolphin.IsChecked = SettingsManager.Instance.Settings.FollowDolphin;
+        this.chkEnableDICam.IsChecked = SettingsManager.Instance.Settings.EnableDICam;
         this.ConnectCodes.ItemsSource = SettingsManager.Instance.Settings.ConnectCodes;
         this.DisplayNames.ItemsSource = SettingsManager.Instance.Settings.DisplayNames;
         this.DolphinStatusText.Text = $"Dolphin status: {SettingsManager.Instance.DolphinConnectionStatus}";
@@ -259,6 +260,24 @@ public partial class SettingsWindow : Window
         if (!_initializing)
         {
             SettingsManager.Instance.Settings.TrackCharacter = ((TextBlock)((ComboBoxItem)CharacterComboBox.SelectedItem).Content).Text;
+            SettingsManager.Instance.SaveSettings();
+        }
+    }
+
+    private void chkEnableDICam_Checked(object sender, RoutedEventArgs e)
+    {
+        if (!_initializing)
+        {
+            SettingsManager.Instance.Settings.EnableDICam = true;
+            SettingsManager.Instance.SaveSettings();
+        }
+    }
+
+    private void chkEnableDICam_Unchecked(object sender, RoutedEventArgs e)
+    {
+        if (!_initializing)
+        {
+            SettingsManager.Instance.Settings.EnableDICam = false;
             SettingsManager.Instance.SaveSettings();
         }
     }

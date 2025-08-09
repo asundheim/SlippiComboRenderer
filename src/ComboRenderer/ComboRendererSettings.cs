@@ -23,6 +23,8 @@ internal class ComboRendererSettings
     public List<string> ConnectCodes { get; set; } = new List<string>();
     public List<string> DisplayNames { get; set; } = new List<string>();
 
+    public bool EnableDICam { get; set; } = true;
+
     public bool FollowDolphin
     { 
         get; 

@@ -165,5 +165,11 @@ internal class ReplayComboRenderer : BaseComboRenderer
         base.Dispose();
 
         _dolphinLauncher?.Dispose();
+        if (_comboBot is not null)
+        {
+            _comboBot.OnDI -= HandleDI;
+            _comboBot.Dispose();
+            _comboBot = null;
+        }
     }
 }
