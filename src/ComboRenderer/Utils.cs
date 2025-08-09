@@ -38,7 +38,8 @@ internal static class Utils
 
     public static bool IsRepeatedAction(this Actions previousAction, Actions nextAction)
     {
-        if (previousAction == Actions.FirefoxStartup && nextAction == Actions.Firefox)
+        if ((previousAction == Actions.FirefoxStartup && nextAction == Actions.Firefox) ||
+            (previousAction == Actions.FireBirdStartup && nextAction == Actions.FireBird))
         {
             return true;
         }
@@ -55,7 +56,7 @@ internal static class Utils
     // some actions have a startup longer than the timeout, but we don't want them to timeout before the next action comes out
     public static bool IsLongStartupAction(this Actions action) => action switch
     {
-        Actions.FirefoxStartup => true,
+        Actions.FirefoxStartup or Actions.FireBirdStartup => true,
         _ => false
     };
 
