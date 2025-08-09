@@ -6,7 +6,7 @@ Built on top of [Slippi.NET](https://github.com/asundheim/Slippi.NET)
 
 ![](docs/sample.gif)
 
-**Note: this only works with Fox. It can be made to work with other characters and was designed to be extensible.
+**Note: this only works with Fox and Falco. It can be made to work with other characters and was designed to be extensible.
 Please reach out if you'd like to help by adding other characters.**
 
 # To use
