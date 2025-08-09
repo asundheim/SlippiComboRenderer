@@ -63,7 +63,8 @@ public static class ComboImageBuilder
         else
         {
             eachButton = eachButton.OrderByDescending(x => x, SimpleButtonsComparer.Instance).ToList();
-            int nonStickIndex = eachButton.Index().First(x => !ButtonIsControlStick(x.Item)).Index;
+            var orderedNonStick = eachButton.Index().Where(x => !ButtonIsControlStick(x.Item)).ToList();
+            int nonStickIndex = orderedNonStick.Count > 0 ? orderedNonStick[0].Index : eachButton.Count;
             SimpleButtons stick = SimpleButtons.NONE;
             for (int i = 0; i < nonStickIndex; i++)
             {
