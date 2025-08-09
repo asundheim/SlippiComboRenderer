@@ -1,4 +1,5 @@
 ﻿using ComboInterpreter;
+using ComboInterpreter.ComboInterpreters;
 using OBSWebsocketDotNet;
 using Slippi.NET.Console;
 using Slippi.NET.Console.Types;
@@ -42,7 +43,7 @@ internal class LiveComboRenderer : BaseComboRenderer
                 await Task.Delay(1000);
 
                 _cancellationToken = _cts.Token;
-                var comboBot = new FoxComboInterpreter(path, [..SettingsManager.Instance.Settings.ConnectCodes, ..SettingsManager.Instance.Settings.DisplayNames]);
+                var comboBot = Utils.GetComboInterpreterForSettings(gamePath: path, isLive: true);
 
                 InvokeNewGame(comboBot);
             });

@@ -7,7 +7,7 @@
         xmlns:ui="http://schemas.modernwpf.com/2019"
         mc:Ignorable="d"
         Background="#333333"
-        MinWidth="400"
+        MinWidth="440"
         MinHeight="800"
         SizeToContent="WidthAndHeight"
         ui:WindowHelper.UseModernWindowStyle="True"
@@ -50,6 +50,13 @@
                 </Trigger>
             </Style.Triggers>
         </Style>
+        <Style TargetType="ComboBox">
+            <Setter Property="IsEditable" Value="False"/>
+            <Setter Property="IsReadOnly" Value="True" />
+            <Setter Property="Text" Value=""/>
+            <Setter Property="SelectedIndex" Value="0"/>
+            <Setter Property="Foreground" Value="Black"/>
+        </Style>
         <TextDecorationCollection x:Key="DottedUnderline">
             <TextDecoration Location="Underline">
                 <TextDecoration.Pen>
@@ -73,6 +80,20 @@
                     <TextBlock Text="Close this window to save changes. On close, this will collapse to the system taskbar as a tray icon. You can quit it from there." 
                                TextWrapping="Wrap" FontStyle="Oblique"
                                FontSize="14"/>
+                    <Separator/>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Track character: " VerticalAlignment="Center"/>
+                        <ComboBox x:Name="CharacterComboBox" SelectionChanged="CharacterComboBox_SelectionChanged" 
+                                  Text="{Binding RelativeSource={RelativeSource Self}, Path=SelectedItem.Content.Text}">
+                            <ComboBoxItem>
+                                <TextBlock Text="Fox" Foreground="Black" Width="100"/>
+                            </ComboBoxItem>
+                            <ComboBoxItem>
+                                <TextBlock Text="Falco" Foreground="Black" Width="100"/>
+                            </ComboBoxItem>
+                        </ComboBox>
+                    </StackPanel>
+                    
                     <Separator/>
                     <CheckBox x:Name="chkFollowDolphin" IsChecked="True" Checked="chkFollowDolphin_Checked" Unchecked="chkFollowDolphin_Unchecked"
                         Margin="0,0,0,0">
@@ -156,11 +177,15 @@
 
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="Track window: " VerticalAlignment="Center"/>
-                        <ComboBox x:Name="TrackWindowComboBox" IsEditable="False" IsReadOnly="True" Text="{Binding RelativeSource={RelativeSource Self}, Path=SelectedItem}"
-                                  SelectedIndex="0"
+                        <ComboBox x:Name="TrackWindowComboBox" 
+                                  Text="{Binding RelativeSource={RelativeSource Self}, Path=SelectedItem.Content.Text}"
                                   SelectionChanged="TrackWindowComboBox_SelectionChanged">
-                            <ComboBoxItem Content="Live"/>
-                            <ComboBoxItem Content="Replay"/>
+                            <ComboBoxItem>
+                                <TextBlock Text="Live" Foreground="Black" Width="100"/>
+                            </ComboBoxItem>
+                            <ComboBoxItem>
+                                <TextBlock Text="Replay" Foreground="Black" Width="100"/>
+                            </ComboBoxItem>
                         </ComboBox>
                     </StackPanel>
 
@@ -178,8 +203,11 @@
                     </StackPanel>
 
                     <Separator/>
+                    <Separator Margin="0,10,0,5"/>
+                    <TextBlock Text="Replay settings. Only applicable to command-line launches with a queue json file (e.g. SlippiComboRenderer.exe ./queue.json)" 
+                                TextWrapping="Wrap" FontStyle="Oblique"
+                                FontSize="14"/>
                     <Separator/>
-
                     <StackPanel Orientation="Horizontal">
                         <TextBlock x:Name="ReplayIsoPathText" Text="Replay ISO path: " VerticalAlignment="Center" />
                         <Button x:Name="BrowseIsoButton" Margin="5,0,0,0" Click="BrowseIsoButton_Click">

@@ -19,7 +19,7 @@ internal class WindowInfo
 
 internal partial class DolphinWindowTracker : IDisposable
 {
-    private bool _isPlaybackDolphin;
+    private readonly bool _isPlaybackDolphin;
     private WindowInfo? _dolphinInfo = null;
 
     private UnhookWinEventSafeHandle? _eventHook = null;
@@ -110,7 +110,10 @@ internal partial class DolphinWindowTracker : IDisposable
 
     public void Dispose()
     {
-        _callbackHandle?.Free();
         _eventHook?.Close();
+        _eventHook = null;
+
+        _callbackHandle?.Free();
+        _callbackHandle = null;
     }
 }

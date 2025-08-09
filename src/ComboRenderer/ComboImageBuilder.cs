@@ -1,4 +1,4 @@
-﻿using ComboInterpreter;
+﻿using ComboInterpreter.Types;
 using Slippi.NET.Stats.Types;
 using System.Globalization;
 using System.Windows;

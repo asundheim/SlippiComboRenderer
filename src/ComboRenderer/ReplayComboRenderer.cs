@@ -1,4 +1,5 @@
 ﻿using ComboInterpreter;
+using ComboInterpreter.ComboInterpreters;
 using OBSWebsocketDotNet;
 using Slippi.NET.Console;
 using Slippi.NET.Console.Types;
@@ -15,7 +16,7 @@ internal class ReplayComboRenderer : BaseComboRenderer
 {
     private readonly Window _window;
     private DolphinLauncher? _dolphinLauncher;
-    private FoxComboInterpreter? _comboBot;
+    private BaseComboInterpreter? _comboBot;
 
     private readonly string? _replayPath = null;
     private int? _startFrame = null;
@@ -58,7 +59,7 @@ internal class ReplayComboRenderer : BaseComboRenderer
                 _comboBot.OnDI -= HandleDI;
             }
 
-            _comboBot = new FoxComboInterpreter(args.FilePath, args.StartFrame, [..SettingsManager.Instance.Settings.ConnectCodes, ..SettingsManager.Instance.Settings.DisplayNames]);
+            _comboBot = Utils.GetComboInterpreterForSettings(args.FilePath, isLive: false, args.StartFrame);
             _comboBot.OnDI += HandleDI;
 
             InvokeNewGame(_comboBot);

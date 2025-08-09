@@ -12,9 +12,9 @@ namespace ComboRenderer;
 public partial class SettingsWindow : Window
 {
     private bool _initializing = true;
-    private readonly FoxRenderer _parent;
+    private readonly ComboRendererWindow _parent;
 
-    public SettingsWindow(FoxRenderer parent)
+    public SettingsWindow(ComboRendererWindow parent)
     {
         _parent = parent;
         this.Icon = _parent.Icon;
@@ -27,6 +27,22 @@ public partial class SettingsWindow : Window
         this.DolphinStatusText.Text = $"Dolphin status: {SettingsManager.Instance.DolphinConnectionStatus}";
         this.ReplayDolphinText.Text = $"Replay Dolphin path: {SettingsManager.Instance.Settings.ReplayDolphinPath}";
         this.ReplayIsoPathText.Text = $"Replay ISO path: {SettingsManager.Instance.Settings.ReplayIsoPath}";
+        for (int i = 0; i < CharacterComboBox.Items.Count; i++)
+        {
+            ComboBoxItem? item = (ComboBoxItem)this.CharacterComboBox.Items[i];
+            if (((TextBlock)item.Content).Text == SettingsManager.Instance.Settings.TrackCharacter)
+            {
+                this.CharacterComboBox.SelectedIndex = i;
+            }
+        }
+        for (int i = 0; i < TrackWindowComboBox.Items.Count; i++)
+        {
+            ComboBoxItem? item = (ComboBoxItem)this.TrackWindowComboBox.Items[i];
+            if (((TextBlock)item.Content).Text == SettingsManager.Instance.Settings.TrackWindow)
+            {
+                this.TrackWindowComboBox.SelectedItem = item;
+            }
+        }
         this.OBSAddressInput.Text = SettingsManager.Instance.Settings.OBSAddress;
         this.OBSPortInput.Value = SettingsManager.Instance.Settings.OBSPort;
         this.WidthBox.Value = SettingsManager.Instance.Settings.ExplicitWidth;
@@ -163,7 +179,7 @@ public partial class SettingsWindow : Window
         if (!_initializing)
         {
             // 😈 
-            SettingsManager.Instance.Settings.TrackWindow = (string)((ComboBoxItem)TrackWindowComboBox.SelectedItem).Content;
+            SettingsManager.Instance.Settings.TrackWindow = ((TextBlock)((ComboBoxItem)TrackWindowComboBox.SelectedItem).Content).Text;
             SettingsManager.Instance.SaveSettings();
         }
     }
@@ -235,6 +251,15 @@ public partial class SettingsWindow : Window
             SettingsManager.Instance.SaveSettings();
 
             ReplayDolphinText.Text = $"Replay Dolphin path: {SettingsManager.Instance.Settings.ReplayDolphinPath}";
+        }
+    }
+
+    private void CharacterComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+        if (!_initializing)
+        {
+            SettingsManager.Instance.Settings.TrackCharacter = ((TextBlock)((ComboBoxItem)CharacterComboBox.SelectedItem).Content).Text;
+            SettingsManager.Instance.SaveSettings();
         }
     }
 }

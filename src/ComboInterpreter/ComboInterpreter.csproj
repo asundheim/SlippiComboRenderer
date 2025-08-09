@@ -8,7 +8,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Slippi.NET" Version="0.4.1" />
+    <PackageReference Include="Slippi.NET" Version="0.4.2" />
+	<!--<ProjectReference Include="..\..\..\Slippi.NET\src\Slippi.NET\Slippi.NET.csproj" />-->
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Properties\" />
   </ItemGroup>
 
 </Project>

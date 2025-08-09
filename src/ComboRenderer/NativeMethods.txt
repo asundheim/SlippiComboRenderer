@@ -3,6 +3,7 @@ GetWindowText
 FindWindow
 EnumWindows
 SetWinEventHook
+UnhookWinEvent
 WINEVENT_*
 EVENT_*
 GetWindowThreadProcessId

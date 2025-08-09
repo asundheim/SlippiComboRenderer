@@ -1,4 +1,5 @@
 ﻿using ComboInterpreter;
+using ComboInterpreter.ComboInterpreters;
 using OBSWebsocketDotNet;
 using Slippi.NET.Console.Types;
 
@@ -14,8 +15,8 @@ internal abstract class BaseComboRenderer : IDisposable
         _cancellationToken = _cts.Token;
     }
 
-    public event EventHandler<FoxComboInterpreter>? OnNewGame;
-    protected void InvokeNewGame(FoxComboInterpreter comboBot) => OnNewGame?.Invoke(this, comboBot);
+    public event EventHandler<BaseComboInterpreter>? OnNewGame;
+    protected void InvokeNewGame(BaseComboInterpreter comboBot) => OnNewGame?.Invoke(this, comboBot);
 
     public event EventHandler? OnGameEnd;
     protected void InvokeGameEnd() => OnGameEnd?.Invoke(this, EventArgs.Empty);

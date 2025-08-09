@@ -1,10 +1,25 @@
 ﻿using Newtonsoft.Json;
+using Slippi.NET.Melee.Types;
 
 namespace ComboRenderer;
 
 [JsonObject(MissingMemberHandling = MissingMemberHandling.Ignore)]
 internal class ComboRendererSettings
 {
+    public string TrackCharacter 
+    {
+        get; 
+        set
+        {
+            if (field != value)
+            {
+                field = value;
+                CharacterChanged?.Invoke(this, value);
+            }
+        }
+    } = Character.Fox.ToString();
+    public event EventHandler<string>? CharacterChanged;
+    
     public List<string> ConnectCodes { get; set; } = new List<string>();
     public List<string> DisplayNames { get; set; } = new List<string>();
 

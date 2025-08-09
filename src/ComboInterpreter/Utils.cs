@@ -1,4 +1,5 @@
-﻿using Slippi.NET.Stats.Types;
+﻿using ComboInterpreter.Types;
+using Slippi.NET.Stats.Types;
 using Slippi.NET.Stats.Utils;
 using Slippi.NET.Types;
 using System.Text;
