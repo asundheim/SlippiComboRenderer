@@ -34,15 +34,15 @@
     </PackageReference>
     <PackageReference Include="ModernWpfUI" Version="0.9.6" />
     <PackageReference Include="obs-websocket-dotnet" Version="5.0.1" />
-    <PackageReference Include="Slippi.NET" Version="0.4.2" />
-	<!--<ProjectReference Include="..\..\..\Slippi.NET\src\Slippi.NET\Slippi.NET.csproj"/>
+    <!--<PackageReference Include="Slippi.NET" Version="0.4.2" />-->
+	<ProjectReference Include="..\..\..\Slippi.NET\src\Slippi.NET\Slippi.NET.csproj"/>
 	<ProjectReference Include="$(MSBuildThisFileDirectory)..\..\..\Slippi.NET\src\DolphinENet\DolphinENet.vcxproj">
 		<ReferenceOutputAssembly>false</ReferenceOutputAssembly>
 		<OutputItemType>Content</OutputItemType>
 		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		<Pack>true</Pack>
 		<PackagePath>runtimes/win-x64/native</PackagePath>
-	</ProjectReference>-->
+	</ProjectReference>
   </ItemGroup>
 
   <Target Name="CopyContentToPublish" AfterTargets="Publish">

@@ -265,6 +265,36 @@ public class BaseComboInterpreter : IDisposable
 
                     break;
                 }
+            //case Actions.Turn:
+            //    {
+            //        _pendingBuffer.Add(new PendingAction()
+            //        {
+            //            Action = new ActionEvent()
+            //            {
+            //                Action = Actions.Moonwalk,
+            //                FrameEntry = actionEvent.FrameEntry,
+            //                HasContinuation = false
+            //            },
+            //            ActionsLeft = 1,
+            //            CancelIf = (c) =>
+            //            {
+            //                if (c.Action != Actions.Dash)
+            //                {
+            //                    return true;
+            //                }
+
+            //                var turnPost = actionEvent.FrameEntry.Players![_playerIndex]!.Post;
+            //                bool facingLeft = (turnPost?.FacingDirection ?? 0) < 0;
+
+            //                var dashPost = c.FrameEntry.Players![_playerIndex]!.Post;
+            //                bool dashingLeft = (dashPost?.PositionX ?? 0) < (turnPost?.PositionX ?? 0);
+
+            //                return dashingLeft == facingLeft;
+            //            }
+            //        });
+
+            //        break;
+            //    }
             case Actions.FastFall:
             case Actions.WallJump:
             case Actions.Jab:
@@ -291,6 +321,7 @@ public class BaseComboInterpreter : IDisposable
             case Actions.FSmash:
             case Actions.USmash:
             case Actions.DSmash:
+            case Actions.Moonwalk:
                 {
                     InterpretActionEvent(actionEvent);
                     break;
@@ -359,11 +390,6 @@ public class BaseComboInterpreter : IDisposable
                 {
                     if (args.PlayerIndex == _playerIndex)
                     {
-                        if (actionsLeft != -1)
-                        {
-                            actionsLeft--;
-                        }
-
                         futureAction = new ActionEvent() { Action = args.Action, FrameEntry = args.Frame };
                     }
                 }
@@ -983,6 +1009,19 @@ public class BaseComboInterpreter : IDisposable
                         DisplayName = "ff",
                         HasContinuation = false,
                         Buttons = SimpleButtons.STICK_DOWN,
+                        EndsCombo = false,
+                    });
+
+                    break;
+                }
+            case Actions.Moonwalk:
+                {
+                    _combos.Add(new InterpretedCombo()
+                    {
+                        ActionEvent = actionEvent,
+                        DisplayName = "moonwalk",
+                        HasContinuation = false,
+                        Buttons = Utils.FacingDirectionToStick(facingLeft),
                         EndsCombo = false,
                     });
 

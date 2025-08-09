@@ -2,44 +2,9 @@
   "mode": "queue",
   "queue": [
     {
-      "path": "C:\\src\\SlippiComboRenderer\\src\\ComboRenderer\\slp\\BUN#400.slp",
-      "startFrame": 212,
-      "endFrame": 680
-    },
-    {
-      "path": "C:\\src\\SlippiComboRenderer\\src\\ComboRenderer\\slp\\POOP#733.slp",
-      "startFrame": 350,
-      "endFrame": 889
-    },
-    {
-      "path": "C:\\src\\SlippiComboRenderer\\src\\ComboRenderer\\slp\\STRONG#3.slp",
-      "startFrame": 4900,
-      "endFrame": 5517
-    },
-    {
-      "path": "C:\\src\\SlippiComboRenderer\\src\\ComboRenderer\\slp\\JZ#339.slp",
-      "startFrame": 6885,
-      "endFrame": 7380
-    },
-    {
-      "path": "C:\\src\\SlippiComboRenderer\\src\\ComboRenderer\\slp\\BREN#824-3.slp",
-      "startFrame": 5050,
-      "endFrame": 5969
-    },
-    {
-      "path": "C:\\src\\SlippiComboRenderer\\src\\ComboRenderer\\slp\\DOBY#705-2.slp",
-      "startFrame": 1189,
-      "endFrame": 1800
-    },
-    {
-      "path": "C:\\src\\SlippiComboRenderer\\src\\ComboRenderer\\slp\\SATP#173.slp",
-      "startFrame": 3670,
-      "endFrame": 4400
-    },
-    {
-      "path": "C:\\src\\SlippiComboRenderer\\src\\ComboRenderer\\slp\\YAYA#919.slp",
-      "startFrame": 3500,
-      "endFrame": 4127
+      "path": "C:\\src\\SlippiComboRenderer\\src\\ComboRenderer\\slp\\moonwalk.slp",
+      "startFrame": 3919,
+      "endFrame": 4603
     }
   ]
 }
