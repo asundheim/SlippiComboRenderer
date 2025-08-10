@@ -359,11 +359,6 @@ public class BaseComboInterpreter : IDisposable
                 {
                     if (args.PlayerIndex == _playerIndex)
                     {
-                        if (actionsLeft != -1)
-                        {
-                            actionsLeft--;
-                        }
-
                         futureAction = new ActionEvent() { Action = args.Action, FrameEntry = args.Frame };
                     }
                 }

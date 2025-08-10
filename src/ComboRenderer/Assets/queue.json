@@ -2,6 +2,11 @@
     "mode": "queue",
     "queue": [
     {
+      "path": "C:\\src\\SlippiComboRenderer\\src\\ComboRenderer\\slp\\SMUG#466.slp",
+      "startFrame": 4924,
+      "endFrame": 5426
+    },
+    {
       "path": "C:\\src\\SlippiComboRenderer\\src\\ComboRenderer\\slp\\BUN#400.slp",
       "startFrame": 212,
       "endFrame": 680
