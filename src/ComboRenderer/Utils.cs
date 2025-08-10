@@ -43,7 +43,7 @@ internal static class Utils
         {
             return true;
         }
-        else
+        else if (previousAction == nextAction)
         {
             return previousAction switch
             {
@@ -51,6 +51,8 @@ internal static class Utils
                 _ => false
             };
         }
+
+        return false;
     }
 
     // some actions have a startup longer than the timeout, but we don't want them to timeout before the next action comes out

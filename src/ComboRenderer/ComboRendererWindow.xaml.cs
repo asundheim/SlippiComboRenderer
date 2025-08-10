@@ -507,7 +507,7 @@ public partial class ComboRendererWindow : Window
                 bool animate = true; // should it pop in with an animation?
                 if (ComboRow.Children.Count > 0)
                 {
-                    if (previousAction.IsRepeatedAction(nextAction: combo.ActionEvent.Action) && previousAction == combo.ActionEvent.Action)
+                    if (previousAction.IsRepeatedAction(nextAction: combo.ActionEvent.Action))
                     {
                         ComboRow.Children.RemoveAt(ComboRow.Children.Count - 1);
                         animate = false;
