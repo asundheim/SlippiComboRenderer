@@ -96,7 +96,6 @@ public class BaseComboInterpreter : IDisposable
         _diComputer.OnDI += HandleDI;
 
         _game.GetStats();
-
     }
 
     public BlockingCollection<InterpretedCombo> ComboStream => _combos;

@@ -1,12 +1,5 @@
 ﻿using ComboInterpreter.ComboInterpreters;
-using Slippi.NET.Melee.Data;
-using Slippi.NET.Melee.Types;
 using Slippi.NET.Stats.Types;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
